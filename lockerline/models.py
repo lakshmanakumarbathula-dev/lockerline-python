@@ -1,4 +1,6 @@
-from sqlalchemy import ForeignKey, Integer, String
+from datetime import datetime
+
+from sqlalchemy import DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 
@@ -31,3 +33,15 @@ class Resident(Base):
     tower_id: Mapped[int] = mapped_column(ForeignKey("towers.id"))
     flat: Mapped[str] = mapped_column(String(8))
     name: Mapped[str] = mapped_column(String(80))
+
+
+class Parcel(Base):
+    __tablename__ = "parcels"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    tower_id: Mapped[int] = mapped_column(ForeignKey("towers.id"))
+    flat: Mapped[str] = mapped_column(String(8))
+    size_class: Mapped[str] = mapped_column(String(1))
+    door_id: Mapped[int] = mapped_column(ForeignKey("doors.id"))
+    state: Mapped[str] = mapped_column(String(12))                         # holding | collected
+    dropped_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
