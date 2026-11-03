@@ -1,3 +1,5 @@
+"""Request and response models. Every response goes through one of these; bodies use Field constraints."""
+
 from datetime import datetime, timezone
 from typing import Annotated, Literal
 
@@ -36,8 +38,6 @@ class DoorOut(DoorListItem):
 
 
 class DoorsOut(BaseModel):
-    """Request and response models. Every response goes through one of these; bodies use Field constraints."""
-
     tower: str
     free: int = Field(
         ...,
@@ -61,6 +61,8 @@ class DropOut(BaseModel):
     size_class: SizeClass
     flat: str
     dropped_at: UtcZ
+    code: str = Field(description="Shown once, to the courier")
+    expires_at: UtcZ
 
 
 class ParcelOut(BaseModel):
