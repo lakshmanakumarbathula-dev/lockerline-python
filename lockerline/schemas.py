@@ -1,3 +1,4 @@
+
 """Request and response models. Every response goes through one of these; bodies use Field constraints."""
 
 from datetime import datetime, timezone
@@ -63,6 +64,10 @@ class DropOut(BaseModel):
     dropped_at: UtcZ
     code: str = Field(description="Shown once, to the courier")
     expires_at: UtcZ
+
+
+class PickupIn(BaseModel):
+    code: str = Field(pattern=r"^\d{6}$")
 
 
 class ParcelOut(BaseModel):
